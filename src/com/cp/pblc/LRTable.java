@@ -1,26 +1,25 @@
 package com.cp.pblc;
 
 
-import java.util.List;
 import java.util.Map;
 
 public class LRTable {
-    Map<String, List<String>> action; // every key-value pair stores a column in the LR table
-    Map<String, List<String>> Goto;
+    Map<String,Integer> action; // every key-value pair stores a column in the LR table
+    Map<String, Integer> Goto;
 
-    public Map<String, List<String>> getAction() {
+    public Map<String, Integer> getAction() {
         return action;
     }
 
-    public void setAction(Map<String, List<String>> action) {
+    public void setAction(Map<String, Integer> action) {
         this.action = action;
     }
 
-    public Map<String, List<String>> getGoto() {
+    public Map<String, Integer> getGoto() {
         return Goto;
     }
 
-    public void setGoto(Map<String, List<String>> aGoto) {
-        Goto = aGoto;
+    public void setGoto(Map<String, Integer> Goto) {
+        this.Goto = Goto;
     }
 }

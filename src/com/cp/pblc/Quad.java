@@ -1,4 +1,4 @@
-package com.cp.pblc;  // public classes
+package com.cp.pblc;  // public classes: put all public used classes here
 
 
 public class Quad {
@@ -54,6 +54,11 @@ public class Quad {
 
     public void setNextHop(int nextHop) {
         this.nextHop = nextHop;
+    }
+
+    public void print()
+    {
+        System.out.println(address+": ("+op+", "+arg1+", "+arg2+", "+nextHop+')');
     }
 
 

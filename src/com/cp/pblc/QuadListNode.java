@@ -4,6 +4,9 @@ public class QuadListNode {
     private Quad data;
     private QuadListNode next;
 
+    public QuadListNode() {
+    }
+
     public QuadListNode(Quad data, QuadListNode next) {
         this.data = data;
         this.next = next;

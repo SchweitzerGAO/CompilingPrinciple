@@ -8,6 +8,9 @@ public class Quad {
     private String arg2;  // argument 2
     private int nextHop;  // the next quad to jump
 
+    public Quad() {
+    }
+
     public Quad(int address, String op, String arg1, String arg2, int nextHop) {
         this.address = address;
         this.op = op;

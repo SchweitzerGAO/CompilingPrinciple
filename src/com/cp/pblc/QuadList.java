@@ -2,6 +2,7 @@ package com.cp.pblc;
 
 public class QuadList {
     private QuadListNode head;
+    public QuadList(){}
 
     public QuadList(QuadListNode head) {
         this.head = head;

@@ -2,10 +2,17 @@ package com.cp.pblc;
 
 public class QuadList {
     private QuadListNode head;
-    public QuadList(){}
+    private int nextQuad;
+
+    public QuadList()
+    {
+        this.head = null;
+        this.nextQuad = 100;
+    }
 
     public QuadList(QuadListNode head) {
         this.head = head;
+        nextQuad = 100;
     }
 
     public QuadListNode getHead() {
@@ -15,12 +22,14 @@ public class QuadList {
     public void setHead(QuadListNode head) {
         this.head = head;
     }
-
-    public QuadList makeList()
-    {
-        head = new QuadListNode(new Quad(0,"-","-","-",0),null);
-        return this;
+    public int getNextQuad() {
+        return nextQuad;
     }
+
+    public void setNextQuad(int nextQuad) {
+        this.nextQuad = nextQuad;
+    }
+
 
     public QuadList merge(QuadList newList)
     {
@@ -41,6 +50,22 @@ public class QuadList {
             temp.getData().setNextHop(t);
             temp = temp.getNext();
         }
+    }
+
+    public void emit(String op,String arg1,String arg2,int nextHop)
+    {
+        if(head == null)
+        {
+            head = new QuadListNode(new Quad(nextQuad,"-","-","-",0),null);
+            nextQuad++;
+        }
+        QuadListNode temp = head;
+        while(temp.getNext() != null)
+        {
+            temp = temp.getNext();
+        }
+        temp.setNext(new QuadListNode(new Quad(nextQuad,op,arg1,arg2,nextHop),null));
+        nextQuad++;
     }
 
 }

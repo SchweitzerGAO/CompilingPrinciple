@@ -57,7 +57,7 @@ public class GotoStatement {
         {
             if(elem.isDefined() || !elem.getType().equals("label"))
             {
-                System.err.println("COMPLIE ERROR");
+                System.err.println("COMPILE ERROR");
                 return;
             }
             elem.setDefined(true);

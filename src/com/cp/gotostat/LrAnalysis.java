@@ -13,7 +13,7 @@ import java.util.*;
  * Describe:
  * 2022.1.3 03:00备注
  * 文件路径自行改动
- * 测试样例为ppt“自上而下语法分析”第112页、本项目goto代码（goto的action表有问题，分析时扫描结果为error）
+ * 测试样例为ppt“自上而下语法分析”第112页、本项目“标号和goto”代码
  */
 public class LrAnalysis {
 //    String fileAction = "src/com/cp/gotostat/action.txt";

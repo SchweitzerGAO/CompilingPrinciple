@@ -1,6 +1,7 @@
 package com.cp.gotostat;
 
 import com.cp.pblc.QuadList;
+import com.cp.pblc.QuadListNode;
 import com.cp.pblc.SymbolListElem;
 
 import java.util.ArrayList;
@@ -94,6 +95,12 @@ public class GotoStatement {
         {
             symbolList.add(new SymbolListElem(label,"label",true,quadList.getNextQuad()));
             quadList.emit("j","-","-",0);
+        }
+        QuadListNode temp = quadList.getHead();
+        while(temp != null)
+        {
+            temp.getData().print();
+            temp = temp.getNext();
         }
     }
 }

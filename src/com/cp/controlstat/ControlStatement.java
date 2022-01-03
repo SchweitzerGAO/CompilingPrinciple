@@ -1,4 +1,4 @@
-package com.cp.gotostat;
+package com.cp.controlstat;
 
 import com.cp.pblc.QuadList;
 import com.cp.pblc.SymbolListElem;

@@ -1,4 +1,4 @@
-package com.cp.gotostat;
+package com.cp.test.Goto;
 
 import com.cp.pblc.LRTable;
 import org.junit.Test;
@@ -13,16 +13,15 @@ import java.util.*;
  * Describe:
  * 2022.1.3 03:00备注
  * 文件路径自行改动
- * 测试样例为ppt“自上而下语法分析”第112页、本项目goto代码（goto的action表有问题，分析时扫描结果为error）
  */
-public class LrAnalysis {
+public class GotoAnalysis {
 //    String fileAction = "src/com/cp/gotostat/action.txt";
-    String fileAction = "Z:\\test\\action.txt";
+    String fileAction = "src/com/cp/test/Goto/files/action.txt";
 //    String fileGoto="src/com/cp/gotostat/goto.txt";
-    String fileGoto="Z:\\test\\goto.txt";
-    String testCase="Z:\\test\\test-case\\goto.txt";
+    String fileGoto="src/com/cp/test/Goto/files/goto.txt";
+    String testCase="src/com/cp/test/Goto/files/input.txt";
 //    String testCase="src/com/cp/gotostat/例题输入ppt112页.txt";
-    String wenfa="Z:\\test\\wenfa.txt";
+    String wenfa="src/com/cp/test/Goto/files/wenfa.txt";
 //    String wenfa="src/com/cp/gotostat/wenfa.txt";
     @Test
    public void myAnalysis() throws FileNotFoundException {
@@ -70,7 +69,7 @@ public class LrAnalysis {
                     flag=true;
                     t=0;
                 }
-                if(flag==false){
+                if(!flag){
                     List<Integer> list=new ArrayList<>();
                     gotoMap.put(str,list);
                 }else{

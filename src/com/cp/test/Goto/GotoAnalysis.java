@@ -232,6 +232,7 @@ public class GotoAnalysis {
                 System.out.println("==========");
             }
         }
+        gotoStatement.checkErr();
         gotoStatement.printQuadList();
     }
 }

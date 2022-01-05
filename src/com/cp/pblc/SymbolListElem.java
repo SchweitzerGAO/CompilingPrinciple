@@ -5,12 +5,14 @@ public class SymbolListElem {
     private String type;
     private boolean defined;
     private int address;
+    private boolean used;
 
     public SymbolListElem(String name, String type, boolean defined, int address) {
         this.name = name;
         this.type = type;
         this.defined = defined;
         this.address = address;
+        this.used = false;
     }
 
     public String getName() {
@@ -43,5 +45,13 @@ public class SymbolListElem {
 
     public void setAddress(int address) {
         this.address = address;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
     }
 }

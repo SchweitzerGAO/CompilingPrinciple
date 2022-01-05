@@ -84,6 +84,7 @@ public class GotoStatement {
             if(elem.isDefined())
             {
                 quadList.emit("j","-","-",elem.getAddress());
+                elem.setUsed(true);
             }
             else
             {
@@ -116,6 +117,17 @@ public class GotoStatement {
         {
             temp.getData().print();
             temp = temp.getNext();
+        }
+    }
+
+    public void checkErr()
+    {
+        for(SymbolListElem elem:this.symbolList)
+        {
+            if (!elem.isUsed()) {
+                this.hasError = true;
+                break;
+            }
         }
     }
 

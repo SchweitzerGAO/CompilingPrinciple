@@ -1,2 +1,2 @@
+SLJ a
 goto label
-label a

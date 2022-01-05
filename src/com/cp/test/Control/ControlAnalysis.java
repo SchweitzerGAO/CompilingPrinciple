@@ -143,21 +143,44 @@ public class ControlAnalysis {
             }
             System.out.println("list:"+list);
 
+            //先看要补成哪种类型
+            boolean thenFlag = false;
+            boolean elseFlag = false;
+            for(StringBuilder sb :list){
+                if(sb.toString().contains("then")){
+                    thenFlag = true;
+                }
+                if(sb.toString().contains("else")){
+                    elseFlag = true;
+                }
+            }
+
             int jj=0;
-            String symbol = "";
+//            String symbol = "";
             for (StringBuilder sb : list) {
                 jj++;
                 System.out.println("("+jj+") 测试输入：" + sb.toString());
+                //说明要补成if E then m S n else m S
+                if(thenFlag && elseFlag){
+                    if(sb.toString().contains("then")){
+                        int index=sb.indexOf("then")+5;
+                        sb.insert(index,"m ");
+                        index=sb.indexOf("then")+9;
+                        sb.insert(index," n");
+                    }
+                    if(sb.toString().contains("else")){
+                        int index=sb.indexOf("else")+5;
+                        sb.insert(index,"m ");
+                    }
+                }else{  //说明要补成if E then m S
+                    if(sb.toString().contains("then")){
+                        int index=sb.indexOf("then")+5;
+                        sb.insert(index,"m ");
+                    }
+                }
+//                System.out.println(sb.toString());
                 //按照空格分隔字符串，获取单个元素
                 String[] s = sb.toString().split(" ");
-                //////////////////////////////////////////////////////
-                if(sb.toString().contains("goto")) {
-                    symbol = s[1];
-                }
-                else if(sb.toString().contains("a")) {
-                    symbol = s[0];
-                }
-                //////////////////////////////////////////////////////
 
                 //对栈进行初始化
                 Stack<Integer> stackState = new Stack<>();
@@ -169,76 +192,79 @@ public class ControlAnalysis {
                 for (int i = s.length - 1; i >= 0; i--) {
                     stack2.push(s[i]);
                 }
-//            System.out.println("a的5为："+action.get("a").get(5));
                 System.out.println("LR分析表扫描结果：");
-                do {
-//                System.out.println(stackState);
-                    String input = stack2.peek();
-                    System.out.println("输入："+input);
-
-                    Integer peek = stackState.peek();
-                    System.out.println("状态栈顶："+peek);
-                    ///////////////////////////////////////////////////////////////////
-                    if(!input.equals("goto") && !input.equals("a") && !input.equals("#")) {
-                        input = "i";
-                    }
-                    ////////////////////////////////////////////////////////////////////
-                    Integer param = action.get(input).get(peek);
-                    System.out.println(action.get(input));
-                    System.out.println("加入："+param);
-                    if (param > 0 && param < 999) {
-                        stackState.push(param);
-                        if (!stack2.peek().equals("#"))
-                            stack2.pop();
-                        System.out.println("移入：" + input);
-                        if (!input.equals("#"))
-                            stack1.push(input);
-                    } else if (param < 0) {
-                        String wf = wenfaList.get(-param);
-                        System.out.println("选择规约的项目为："+wf);
-                        String[] frontAndEnd = wf.split("#");
-                        int endLength = frontAndEnd[1].trim().length();
-                        /////////////////////////////////////////////////
-                        switch (param) {
-                            case -2: {
-                                //gotoStatement.parseGoto(symbol);
-                                break;
-                            }
-                            case -3: {
-                                if(s[0].equals("goto")) {
-                                    break;
-                                }
-                                //gotoStatement.parseLabel(symbol);
-                                break;
-                            }
-                            case -4: {
-                                //gotoStatement.parseTerminal();
-                                break;
-                            }
-                        }
-                        ////////////////////////////////////////////////
-//                    System.out.println(endLength);
-                        for (int j = 0; j < endLength; j++) {
-                            stackState.pop();
-                            stack1.pop();
-                        }
-//                    System.out.println(frontAndEnd[0]);
-//                    System.out.println(stackState.size());
-                        stack1.push(frontAndEnd[0]);
-                        Integer f1 = gotoMap.get(stack1.peek()).get(stackState.peek());
-//                    System.out.println(f1);
-                        stackState.push(f1);
-
-                        System.out.println("规约：" + frontAndEnd[0] + "->" + frontAndEnd[1]);
-//                    System.out.println(stackState.peek());
-                    } else if (param == 999) {
-                        System.out.println("accept!!!");
-                        break;
-                    } else {
-                        System.out.println("error!!!");
-                        break;
-                    }
-                } while (!stack1.peek().equals("#"));
+//                do {
+////                System.out.println(stackState);
+//                    String input = stack2.peek();
+//                    System.out.println("输入："+input);
+//
+//                    Integer peek = stackState.peek();
+//                    System.out.println("状态栈顶："+peek);
+//                    ///////////////////////////////////////////////////////////////////
+//                    if(!input.equals("goto") && !input.equals("a") && !input.equals("#")) {
+//                        input = "i";
+//                    }
+//                    ////////////////////////////////////////////////////////////////////
+//                    Integer param = action.get(input).get(peek);
+//                    System.out.println(action.get(input));
+//                    System.out.println("加入："+param);
+//                    if (param > 0 && param < 999) {
+//                        stackState.push(param);
+//                        if (!stack2.peek().equals("#"))
+//                            stack2.pop();
+//                        System.out.println("移入：" + input);
+//                        if (!input.equals("#"))
+//                            stack1.push(input);
+//                    } else if (param < 0) {
+//                        String wf = wenfaList.get(-param);
+//                        System.out.println("选择规约的项目为："+wf);
+//                        String[] frontAndEnd = wf.split("#");
+//                        int endLength = frontAndEnd[1].trim().length();
+//                        /////////////////////////////////////////////////
+//                        switch (param) {
+//                            case -2: {
+//                                //gotoStatement.parseGoto(symbol);
+//                                break;
+//                            }
+//                            case -3: {
+//                                if(s[0].equals("goto")) {
+//                                    break;
+//                                }
+//                                //gotoStatement.parseLabel(symbol);
+//                                break;
+//                            }
+//                            case -4: {
+//                                //gotoStatement.parseTerminal();
+//                                break;
+//                            }
+//                            case -5:{
+//                                /////////////////////////////
+//                                break;
+//                            }
+//                        }
+//                        ////////////////////////////////////////////////
+////                    System.out.println(endLength);
+//                        for (int j = 0; j < endLength; j++) {
+//                            stackState.pop();
+//                            stack1.pop();
+//                        }
+////                    System.out.println(frontAndEnd[0]);
+////                    System.out.println(stackState.size());
+//                        stack1.push(frontAndEnd[0]);
+//                        Integer f1 = gotoMap.get(stack1.peek()).get(stackState.peek());
+////                    System.out.println(f1);
+//                        stackState.push(f1);
+//
+//                        System.out.println("规约：" + frontAndEnd[0] + "->" + frontAndEnd[1]);
+////                    System.out.println(stackState.peek());
+//                    } else if (param == 999) {
+//                        System.out.println("accept!!!");
+//                        break;
+//                    } else {
+//                        System.out.println("error!!!");
+//                        break;
+//                    }
+//                } while (!stack1.peek().equals("#"));
                 System.out.println("==========");
             }
         }

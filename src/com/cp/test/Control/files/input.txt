@@ -1,5 +1,3 @@
-if E 
-then if E 
+if E
 then a1
-else a2 
-else a3
+else a2

@@ -37,34 +37,8 @@ public class ControlStatement {
     }
 
 
-    /**
-     * 控制语句解析
-     */
-    void parseControl()
-    {
-//        SymbolListElem elem = find(label);
-//        if(elem != null)
-//        {
-//            if(elem.isDefined())
-//            {
-//                quadList.emit("j","-","-",elem.getAddress());
-//            }
-//            else
-//            {
-//                int q = elem.getAddress();
-//                elem.setAddress(quadList.getNextQuad());
-//                quadList.emit("j","-","-",q);
-//            }
-//        }
-//        else
-//        {
-//            symbolList.add(new SymbolListElem(label,"label",true,quadList.getNextQuad()));
-//            quadList.emit("j","-","-",0);
-//        }
-    }
 
-    public void printQuadList()
-    {
+    public void printQuadList() {
         if(hasError)
         {
             System.err.println("COMPILE ERROR");

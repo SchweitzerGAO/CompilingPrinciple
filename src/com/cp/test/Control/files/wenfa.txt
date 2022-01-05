@@ -1,6 +1,6 @@
-M#S
-S#ietKS
-S#ietKSLsKS
-K#o
-L#o
+Z#S
+S#ietMS
+S#ietMSNsMS
+M#m
+N#n
 S#a

@@ -1,4 +1,6 @@
-M#S
-S#ietS
-S#ietSsS
+Z#S
+S#ietMS
+S#ietMSNsMS
+M#m
+N#n
 S#a

@@ -159,6 +159,13 @@ public class ControlAnalysis {
             for (StringBuilder sb : list) {
                 jj++;
                 System.out.println("("+jj+") 测试输入：" + sb.toString());
+                int symbol = 0;
+                if(sb.toString().contains("then")){
+                    symbol = 1;
+                }
+                else if(sb.toString().contains("else")){
+                    symbol = 2;
+                }
                 //说明要补成if E then m S n else m S
                 if(thenFlag && elseFlag){
                     if(sb.toString().contains("then")){
@@ -236,7 +243,7 @@ public class ControlAnalysis {
                             }
                             case -3: {
                                 //M#m
-                                controlStatement.parseM();
+                                controlStatement.parseM(symbol);
                                 break;
                             }
                             case -4: {

@@ -36,7 +36,26 @@ public class ControlStatement {
         this.booleanElemList = booleanElemList;
     }
 
+    //S#ietMS
+    public void parseIf(){
 
+    }
+    //S#ietMSNsMS
+    public void parseIfElse(){
+
+    }
+    //M#m
+    public void parseM(){
+
+    }
+    //N#n
+    public void parseN(){
+
+    }
+    //S->a
+    public void parseTerminal(){
+        ///////////////////////////
+    }
 
     public void printQuadList() {
         if(hasError)

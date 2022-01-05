@@ -24,11 +24,10 @@ public class ControlAnalysis {
     Map<String, List<Integer>> gotoMap=new LinkedHashMap<>();
     List<String> wenfaList=new ArrayList<>();
     List<StringBuilder> list=new ArrayList<>();
+    ControlStatement controlStatement = new ControlStatement();
 
     @Test
     public void myAnalysis() throws FileNotFoundException {
-        ControlStatement controlStatement = new ControlStatement();
-
         //生成LR分析表
         LRTable lrTable=new LRTable();
         loadAction(action);
@@ -208,62 +207,73 @@ public class ControlAnalysis {
                     Integer param = action.get(input).get(peek);
                     System.out.println(action.get(input));
                     System.out.println("加入："+param);
-//                    if (param > 0 && param < 999) {
-//                        stackState.push(param);
-//                        if (!stack2.peek().equals("#"))
-//                            stack2.pop();
-//                        System.out.println("移入：" + input);
-//                        if (!input.equals("#"))
-//                            stack1.push(input);
-//                    } else if (param < 0) {
-//                        String wf = wenfaList.get(-param);
-//                        System.out.println("选择规约的项目为："+wf);
-//                        String[] frontAndEnd = wf.split("#");
-//                        int endLength = frontAndEnd[1].trim().length();
-//                        /////////////////////////////////////////////////
-//                        switch (param) {
-//                            case -2: {
-//                                //gotoStatement.parseGoto(symbol);
-//                                break;
-//                            }
-//                            case -3: {
-//                                if(s[0].equals("goto")) {
-//                                    break;
-//                                }
-//                                //gotoStatement.parseLabel(symbol);
-//                                break;
-//                            }
-//                            case -4: {
-//                                //gotoStatement.parseTerminal();
-//                                break;
-//                            }
-//                            case -5:{
-//                                /////////////////////////////
-//                                break;
-//                            }
-//                        }
-//                        ////////////////////////////////////////////////
-////                    System.out.println(endLength);
-//                        for (int j = 0; j < endLength; j++) {
-//                            stackState.pop();
-//                            stack1.pop();
-//                        }
-////                    System.out.println(frontAndEnd[0]);
-////                    System.out.println(stackState.size());
-//                        stack1.push(frontAndEnd[0]);
-//                        Integer f1 = gotoMap.get(stack1.peek()).get(stackState.peek());
-////                    System.out.println(f1);
-//                        stackState.push(f1);
-//
-//                        System.out.println("规约：" + frontAndEnd[0] + "->" + frontAndEnd[1]);
-////                    System.out.println(stackState.peek());
-//                    } else if (param == 999) {
-//                        System.out.println("accept!!!");
-//                        break;
-//                    } else {
-//                        System.out.println("error!!!");
-//                        break;
-//                    }
+                    //表示移进
+                    if (param > 0 && param < 999) {
+                        stackState.push(param);
+                        if (!stack2.peek().equals("#"))
+                            stack2.pop();
+                        System.out.println("移入：" + input);
+                        if (!input.equals("#"))
+                            stack1.push(input);
+                    }
+                    //表示规约
+                    else if (param < 0) {
+                        String wf = wenfaList.get(-param);
+                        System.out.println("选择规约的项目为："+wf);
+                        String[] frontAndEnd = wf.split("#");
+                        //记录要pop出去的数目
+                        int endLength = frontAndEnd[1].trim().length();
+                        switch (param) {
+                            case -1:{
+                                //S#ietMS
+                                controlStatement.parseIf();
+                                break;
+                            }
+                            case -2: {
+                                //S#ietMSNsMS
+                                controlStatement.parseIfElse();
+                                break;
+                            }
+                            case -3: {
+                                //M#m
+                                controlStatement.parseM();
+                                break;
+                            }
+                            case -4: {
+                                //N#n
+                                controlStatement.parseN();
+                                break;
+                            }
+                            case -5:{
+                                //S#a
+                                controlStatement.parseTerminal();
+                                break;
+                            }
+                        }
+                        for (int j = 0; j < endLength; j++) {
+                            stackState.pop();
+                            stack1.pop();
+                        }
+//                    System.out.println(frontAndEnd[0]);
+//                    System.out.println(stackState.size());
+                        stack1.push(frontAndEnd[0]);
+                        Integer f1 = gotoMap.get(stack1.peek()).get(stackState.peek());
+//                    System.out.println(f1);
+                        stackState.push(f1);
+
+                        System.out.println("规约：" + frontAndEnd[0] + "->" + frontAndEnd[1]);
+//                    System.out.println(stackState.peek());
+                    }
+                    //表示成功
+                    else if (param == 999) {
+                        System.out.println("accept!!!");
+                        break;
+                    }
+                    //表示失败
+                    else {
+                        System.out.println("error!!!");
+                        break;
+                    }
                 } while (!stack1.peek().equals("#"));
                 System.out.println("==========");
             }

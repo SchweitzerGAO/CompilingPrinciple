@@ -16,6 +16,7 @@ public class ControlStatement {
     private List<BooleanElem> booleanElemList;
     private QuadList quadList;
 
+
     public ControlStatement(){
         quadList = new QuadList();
         booleanElemList = new ArrayList<>();
@@ -32,6 +33,8 @@ public class ControlStatement {
     public void setBooleanElemList(List<BooleanElem> booleanElemList){
         this.booleanElemList = booleanElemList;
     }
+
+
     /**
      * 控制语句解析
      */

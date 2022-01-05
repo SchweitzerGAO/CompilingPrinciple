@@ -193,21 +193,21 @@ public class ControlAnalysis {
                     stack2.push(s[i]);
                 }
                 System.out.println("LR分析表扫描结果：");
-//                do {
-////                System.out.println(stackState);
-//                    String input = stack2.peek();
-//                    System.out.println("输入："+input);
-//
-//                    Integer peek = stackState.peek();
-//                    System.out.println("状态栈顶："+peek);
-//                    ///////////////////////////////////////////////////////////////////
-//                    if(!input.equals("goto") && !input.equals("a") && !input.equals("#")) {
-//                        input = "i";
-//                    }
-//                    ////////////////////////////////////////////////////////////////////
-//                    Integer param = action.get(input).get(peek);
-//                    System.out.println(action.get(input));
-//                    System.out.println("加入："+param);
+                do {
+//                System.out.println(stackState);
+                    String input = stack2.peek();
+                    System.out.println("输入："+input);
+
+                    Integer peek = stackState.peek();
+                    System.out.println("状态栈顶："+peek);
+                    //除了保留字之外，其他的终结符（a1，a2）统一为a
+                    if(!input.equals("if") && !input.equals("E") && !input.equals("then")&&
+                            !input.equals("else")&& !input.equals("m")&&!input.equals("n")&&!input.equals("#")) {
+                        input = "a";
+                    }
+                    Integer param = action.get(input).get(peek);
+                    System.out.println(action.get(input));
+                    System.out.println("加入："+param);
 //                    if (param > 0 && param < 999) {
 //                        stackState.push(param);
 //                        if (!stack2.peek().equals("#"))
@@ -264,7 +264,7 @@ public class ControlAnalysis {
 //                        System.out.println("error!!!");
 //                        break;
 //                    }
-//                } while (!stack1.peek().equals("#"));
+                } while (!stack1.peek().equals("#"));
                 System.out.println("==========");
             }
         }

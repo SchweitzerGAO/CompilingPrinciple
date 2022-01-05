@@ -1,2 +1,2 @@
-i a
 goto i
+i a

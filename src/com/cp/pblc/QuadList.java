@@ -33,7 +33,11 @@ public class QuadList {
 
     public QuadList merge(QuadList newList)
     {
-        QuadListNode temp = this.head;
+        QuadListNode temp = head;
+        if(temp == null)
+        {
+            return null;
+        }
         while(temp.getNext() != null)
         {
             temp = temp.getNext();
@@ -45,7 +49,7 @@ public class QuadList {
     public void backpatch(int t)
     {
         QuadListNode temp = head;
-        while(temp.getNext() != null)
+        while(temp != null)
         {
             temp.getData().setNextHop(t);
             temp = temp.getNext();
@@ -56,8 +60,9 @@ public class QuadList {
     {
         if(head == null)
         {
-            head = new QuadListNode(new Quad(nextQuad,"-","-","-",0),null);
+            head = new QuadListNode(new Quad(nextQuad,op,arg1,arg2,nextHop),null);
             nextQuad++;
+            return;
         }
         QuadListNode temp = head;
         while(temp.getNext() != null)

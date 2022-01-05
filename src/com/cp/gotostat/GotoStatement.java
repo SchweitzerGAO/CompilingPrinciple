@@ -10,6 +10,7 @@ import java.util.List;
 public class GotoStatement {
     private List<SymbolListElem> symbolList;
     private QuadList quadList;
+    private boolean hasError = false;
 
     public GotoStatement() {
         symbolList = new ArrayList<>();
@@ -51,14 +52,14 @@ public class GotoStatement {
      * 标号语句解析
      * @param label 标号
      */
-    void parseLabel(String label)
+    public void parseLabel(String label)
     {
         SymbolListElem elem = find(label);
         if(elem != null)  // 若标号存在
         {
             if(elem.isDefined() || !elem.getType().equals("label"))
             {
-                System.err.println("COMPILE ERROR");
+                hasError = true;
                 return;
             }
             elem.setDefined(true);
@@ -75,7 +76,7 @@ public class GotoStatement {
      * goto语句解析
      * @param label goto的标号
      */
-    void parseGoto(String label)
+   public void parseGoto(String label)
     {
         SymbolListElem elem = find(label);
         if(elem != null)
@@ -93,14 +94,29 @@ public class GotoStatement {
         }
         else
         {
-            symbolList.add(new SymbolListElem(label,"label",true,quadList.getNextQuad()));
+            symbolList.add(new SymbolListElem(label,"label",false,quadList.getNextQuad()));
             quadList.emit("j","-","-",0);
         }
-        QuadListNode temp = quadList.getHead();
+    }
+
+    public void parseTerminal()
+    {
+        this.quadList.emit("-","-","-",0);
+    }
+
+    public void printQuadList()
+    {
+        if(hasError)
+        {
+            System.err.println("COMPILE ERROR");
+            return;
+        }
+        QuadListNode temp = this.quadList.getHead();
         while(temp != null)
         {
             temp.getData().print();
             temp = temp.getNext();
         }
     }
+
 }

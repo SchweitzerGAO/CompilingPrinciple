@@ -1,5 +1,6 @@
 package com.cp.test.Goto;
 
+import com.cp.gotostat.GotoStatement;
 import com.cp.pblc.LRTable;
 import org.junit.Test;
 
@@ -25,6 +26,7 @@ public class GotoAnalysis {
 //    String wenfa="src/com/cp/gotostat/wenfa.txt";
     @Test
    public void myAnalysis() throws FileNotFoundException {
+        GotoStatement gotoStatement = new GotoStatement();
         LRTable lrTable=new LRTable();
         Map<String, List<Integer>> action=new LinkedHashMap<>();
             try (Scanner sc = new Scanner(new FileReader(fileAction))) {
@@ -126,10 +128,19 @@ public class GotoAnalysis {
 //                ii++;
             }
             int jj=0;
+            String symbol = "";
             for (StringBuilder sb : list) {
                 jj++;
                 System.out.println("("+jj+") 测试输入：" + sb.toString());
                 String[] s = sb.toString().split(" ");
+                if(sb.toString().contains("goto"))
+                {
+                    symbol = s[1];
+                }
+                else if(sb.toString().contains("a"))
+                {
+                    symbol = s[0];
+                }
 //            System.out.println(s[3]);
                 Stack<Integer> stackState = new Stack<>();
                 Stack<String> stack1 = new Stack<>();
@@ -149,30 +160,54 @@ public class GotoAnalysis {
                 do {
 //                System.out.println(stackState);
                     String input = stack2.peek();
-//                System.out.println("输入："+input);
+                System.out.println("输入："+input);
 
                     Integer peek = stackState.peek();
-//                System.out.println("状态栈顶："+peek);
-                    Integer canshu = action.get(input).get(peek);
-//                System.out.println(action.get(input));
-//                System.out.println("加入："+canshu);
-                    if (canshu > 0 && canshu < 999) {
-                        stackState.push(canshu);
+                System.out.println("状态栈顶："+peek);
+                    Integer param = action.get(input).get(peek);
+                System.out.println(action.get(input));
+                System.out.println("加入："+param);
+                    if (param > 0 && param < 999) {
+                        stackState.push(param);
                         if (!stack2.peek().equals("#"))
                             stack2.pop();
                         System.out.println("移入：" + input);
                         if (!input.equals("#"))
                             stack1.push(input);
-                    } else if (canshu < 0) {
-                        String wf = wenfaList.get(-canshu);
-//                    System.out.println("选择规约的项目为："+wf);
+                    } else if (param < 0) {
+                        String wf = wenfaList.get(-param);
+                    System.out.println("选择规约的项目为："+wf);
                         String[] frontAndEnd = wf.split("#");
                         int endLength = frontAndEnd[1].trim().length();
+                        switch (param)
+                        {
+                            case -2:
+                            {
+                                gotoStatement.parseGoto(symbol);
+                                break;
+                            }
+                            case -3:
+                            {
+                                if(s[0].equals("goto"))
+                                {
+                                    break;
+                                }
+                                gotoStatement.parseLabel(symbol);
+                                break;
+                            }
+                            case -4:
+                            {
+                                gotoStatement.parseTerminal();
+                                break;
+                            }
+
+                        }
 //                    System.out.println(endLength);
                         for (int j = 0; j < endLength; j++) {
                             stackState.pop();
                             stack1.pop();
                         }
+
 //                    System.out.println(frontAndEnd[0]);
 //                    System.out.println(stackState.size());
                         stack1.push(frontAndEnd[0]);
@@ -182,7 +217,7 @@ public class GotoAnalysis {
 
                         System.out.println("规约：" + frontAndEnd[0] + "->" + frontAndEnd[1]);
 //                    System.out.println(stackState.peek());
-                    } else if (canshu == 999) {
+                    } else if (param == 999) {
                         System.out.println("accept!!!");
                         break;
                     } else {
@@ -193,5 +228,6 @@ public class GotoAnalysis {
                 System.out.println("==========");
             }
         }
+        gotoStatement.printQuadList();
     }
 }

@@ -1,2 +1,2 @@
-goto i
-i a
+goto label
+label a

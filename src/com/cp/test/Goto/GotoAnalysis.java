@@ -164,6 +164,10 @@ public class GotoAnalysis {
 
                     Integer peek = stackState.peek();
                 System.out.println("状态栈顶："+peek);
+                if(!input.equals("goto") && !input.equals("a") && !input.equals("#"))
+                {
+                    input = "i";
+                }
                     Integer param = action.get(input).get(peek);
                 System.out.println(action.get(input));
                 System.out.println("加入："+param);

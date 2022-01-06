@@ -214,6 +214,7 @@ public class ControlAnalysis {
                     Integer param = action.get(input).get(peek);
                     System.out.println(action.get(input));
                     System.out.println("加入："+param);
+                    System.out.println("-------");
                     //表示移进
                     if (param > 0 && param < 999) {
                         stackState.push(param);

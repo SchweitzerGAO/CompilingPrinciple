@@ -1,7 +1,7 @@
-M#S
-S#iEtKS
-S#iEtKSLsKS
+Z#S
+S#iEtMS
+S#iEtMSNsMS
 E#e
-K#o
-L#o
+M#o
+N#o
 S#a

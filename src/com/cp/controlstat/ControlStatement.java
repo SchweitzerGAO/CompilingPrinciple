@@ -45,14 +45,13 @@ public class ControlStatement {
 
     //S#ietMS
     public void parseIf(){
-        //quadList.backpatch(E.truelist,M.quad);
+        quadList.backpatch(E.getTruelist(),M[0].getQuad());
         ////S.nextlist = merge(E.falselist,S1.nextlist)
     }
     //S#ietMSNsMS
     public void parseIfElse(){
-        //quadList.backpatch();
-        //quadList.backpatch(E.truelist,M1.quad);
-        //quadList.backpatch(E.falselist,M2.quad);
+        quadList.backpatch(E.getTruelist(),M[0].getQuad());
+        quadList.backpatch(E.getFalselist(),M[1].getQuad());
         //S.nextlist = merge(S1.nextlist,N.nextlist,S2.nextlist);
     }
     //E#e

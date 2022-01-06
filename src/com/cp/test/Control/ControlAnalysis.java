@@ -207,8 +207,8 @@ public class ControlAnalysis {
                     Integer peek = stackState.peek();
                     System.out.println("状态栈顶："+peek);
                     //除了保留字之外，其他的终结符（a1，a2）统一为a
-                    if(!input.equals("if") && !input.equals("E") && !input.equals("then")&&
-                            !input.equals("else")&& !input.equals("m")&&!input.equals("n")&&!input.equals("#")) {
+                    if(!input.equals("if") && !input.equals("e") && !input.equals("then")&&
+                            !input.equals("else")&& !input.equals("o")&&!input.equals("#")) {
                         input = "a";
                     }
                     Integer param = action.get(input).get(peek);

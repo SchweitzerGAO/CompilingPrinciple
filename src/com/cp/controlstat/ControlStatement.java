@@ -12,11 +12,11 @@ import java.util.List;
  */
 public class ControlStatement {
     //布尔表达式E，里面有两个综合属性E.truelist和E.falselist
-    private BooleanElem E;
-    private List<StatementElem> statementElemList;
-    private StatementElem N;
-    private AddressElem[] M;
-    private QuadList quadList;
+    private BooleanElem E;      //布尔表达式
+    private List<StatementElem> statementElemList;  //语句S
+    private StatementElem N;    //N
+    private AddressElem[] M;    //M
+    private QuadList quadList;  //四元式
 
     public ControlStatement(){
         quadList = new QuadList();
@@ -46,11 +46,13 @@ public class ControlStatement {
     //S#ietMS
     public void parseIf(){
         //quadList.backpatch(E.truelist,M.quad);
-        ////S.nextlist = quadList.merge()
+        ////S.nextlist = merge(E.falselist,S1.nextlist)
     }
     //S#ietMSNsMS
     public void parseIfElse(){
-        //quadList.backpatch();
+        //quadList.backpatch(E.truelist,M1.quad);
+        //quadList.backpatch(E.falselist,M2.quad);
+        //S.nextlist = merge(S1.nextlist,N.nextlist,S2.nextlist);
     }
     //M#m
     public void parseM(int symbol){
@@ -59,6 +61,7 @@ public class ControlStatement {
     }
     //N#n
     public void parseN(){
+        //N.nextlist = makelist(nextquad)
         N = new StatementElem(quadList.getNextQuad());
         quadList.emit("j","-","-",0);
     }

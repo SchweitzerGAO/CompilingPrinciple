@@ -166,22 +166,22 @@ public class ControlAnalysis {
                 else if(sb.toString().contains("else")){
                     symbol = 2;
                 }
-                //说明要补成if E then m S n else m S
+                //说明要补成if E then m S n else m S///////////////////////////
                 if(thenFlag && elseFlag){
                     if(sb.toString().contains("then")){
                         int index=sb.indexOf("then")+5;
-                        sb.insert(index,"m ");
+                        sb.insert(index,"o ");
                         index=sb.indexOf("then")+9;
-                        sb.insert(index," n");
+                        sb.insert(index," o");
                     }
                     if(sb.toString().contains("else")){
                         int index=sb.indexOf("else")+5;
-                        sb.insert(index,"m ");
+                        sb.insert(index,"o ");
                     }
                 }else{  //说明要补成if E then m S
                     if(sb.toString().contains("then")){
                         int index=sb.indexOf("then")+5;
-                        sb.insert(index,"m ");
+                        sb.insert(index,"o ");
                     }
                 }
 //                System.out.println(sb.toString());

@@ -8,7 +8,9 @@ package com.cp.pblc;
 public class StatementElem {
     private int nextlist;
 
-    public StatementElem(){ }
+    public StatementElem(){
+        nextlist = 0;
+    }
 
     public StatementElem(int nextlist){
         this.nextlist = nextlist;

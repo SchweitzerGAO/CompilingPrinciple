@@ -159,13 +159,12 @@ public class ControlAnalysis {
             for (StringBuilder sb : list) {
                 jj++;
                 System.out.println("("+jj+") 测试输入：" + sb.toString());
-                int symbol = 0;
-                if(sb.toString().contains("then")){
-                    symbol = 1;
-                }
-                else if(sb.toString().contains("else")){
-                    symbol = 2;
-                }
+//                if(sb.toString().contains("then")){
+//                    symbol = 1;
+//                }
+//                else if(sb.toString().contains("else")){
+//                    symbol = 2;
+//                }
                 //说明要补成if E then m S n else m S///////////////////////////
                 if(thenFlag && elseFlag){
                     if(sb.toString().contains("then")){
@@ -212,8 +211,8 @@ public class ControlAnalysis {
                         input = "a";
                     }
                     Integer param = action.get(input).get(peek);
-                    System.out.println(action.get(input));
                     System.out.println("加入："+param);
+                    System.out.println(action.get(input));
                     System.out.println("-------");
                     //表示移进
                     if (param > 0 && param < 999) {
@@ -249,7 +248,7 @@ public class ControlAnalysis {
                             }
                             case -4: {
                                 //M#m
-                                controlStatement.parseM(symbol);
+                                controlStatement.parseM();
                                 break;
                             }
                             case -5: {
@@ -283,7 +282,7 @@ public class ControlAnalysis {
                         break;
                     }
                     //表示失败
-                    else {
+                    else{
                         System.out.println("error!!!");
                         break;
                     }

@@ -16,15 +16,15 @@ public class ControlStatement {
     private List<StatementElem> statementElemList;  //语句
     private final StatementElem S;    //S
     private StatementElem N;    //N
-    private final AddressElem[] M;    //M
+    private final List<AddressElem> MList;    //M
     private QuadList quadList;  //四元式
 
     public ControlStatement(){
         quadList = new QuadList();
         E = new BooleanElem(0,0);
         statementElemList = new ArrayList<>();
+        MList = new ArrayList<>();
         S = new StatementElem(0);
-        M = new AddressElem[2];
     }
     public QuadList getQuadList() {
         return quadList;
@@ -48,7 +48,7 @@ public class ControlStatement {
     //S#ietMS
     public void parseIf(){
         //backpatch(E.truelist,M.quad)
-        quadList.backpatch(E.getTruelist(),M[0].getQuad());
+        quadList.backpatch(E.getTruelist(), MList.get(0).getQuad());
         //S.nextlist:=merge(E.falselist,S1,nextlist)
         StatementElem S1 = statementElemList.get(0);
         S.setNextlist(quadList.merge(E.getFalselist(),S1.getNextlist()));
@@ -57,8 +57,8 @@ public class ControlStatement {
     public void parseIfElse(){
         //backpatch(E.truelist,M1.quad)
         //backpatch(E.falselist,M2.quad)
-        quadList.backpatch(E.getTruelist(),M[0].getQuad());
-        quadList.backpatch(E.getFalselist(),M[1].getQuad());
+        quadList.backpatch(E.getTruelist(),MList.get(0).getQuad());
+        quadList.backpatch(E.getFalselist(),MList.get(1).getQuad());
         //S.nextlist = merge(S1.nextlist,N.nextlist,S2.nextlist);
         StatementElem S1 = statementElemList.get(0);
         StatementElem S2 = statementElemList.get(1);
@@ -73,10 +73,10 @@ public class ControlStatement {
         quadList.emit("j","-","-",0);
     }
     //M#m
-    public void parseM(int symbol){
+    public void parseM(){
         //symbol对应位置1和2，索引对应0和1
         //M.quad:=nextquad
-        M[symbol - 1] = new AddressElem(quadList.getNextQuad());
+        MList.add(new AddressElem(quadList.getNextQuad()));
     }
     //N#n
     public void parseN(){

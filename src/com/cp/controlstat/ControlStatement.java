@@ -46,7 +46,7 @@ public class ControlStatement {
     //S#ietMS
     public void parseIf(){
         quadList.backpatch(E.getTruelist(),M[0].getQuad());
-        ////S.nextlist = merge(E.falselist,S1.nextlist)
+        //S.nextlist = merge(E.falselist,S1.nextlist)
     }
     //S#ietMSNsMS
     public void parseIfElse(){

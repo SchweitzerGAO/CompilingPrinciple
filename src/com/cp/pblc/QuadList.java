@@ -31,19 +31,27 @@ public class QuadList {
     }
 
 
-    public QuadList merge(QuadList newList)
-    {
+    public int merge(int p1,int p2) {
+        //从头开始，先查找到地址为p1的节点
         QuadListNode temp = head;
-        if(temp == null)
-        {
-            return null;
-        }
-        while(temp.getNext() != null)
-        {
+        while(temp != null) {
+            if(temp.getData().getAddress() == p1){
+                break;
+            }
             temp = temp.getNext();
         }
-        temp.setNext(newList.head);
-        return this;
+        if(temp == null){
+            System.out.println("backpatch出错，不存在地址为"+p1+"的四元式");
+        }else{
+            //找到第一个链条的尾部,跳过所有该链条下地址栏不为0（代表链条没结束）的四元式
+            while(temp.getData().getNextHop()!=0){
+                temp = temp.getNext();
+            }
+            //讲p1尾部地址填写成p2，即两个链条相连
+            temp.getData().setNextHop(p2);
+        }
+        //返回链首
+        return p1;
     }
 
     public void backpatch(int p,int t) {

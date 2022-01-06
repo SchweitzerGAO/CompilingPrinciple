@@ -46,13 +46,33 @@ public class QuadList {
         return this;
     }
 
-    public void backpatch(int t)
-    {
+    public void backpatch(int p,int t) {
+        //从头开始，先查找到地址为p的节点
         QuadListNode temp = head;
-        while(temp != null)
-        {
-            temp.getData().setNextHop(t);
+        while(temp != null) {
+            if(temp.getData().getAddress() == p){
+                break;
+            }
             temp = temp.getNext();
+        }
+        if(temp == null){
+            System.out.println("backpatch出错，不存在地址为"+p+"的四元式");
+        }else{
+            //0表示回填结束了
+            int next;
+            while(true){
+                //先记录原本该回填的下一条
+                next = temp.getData().getNextHop();
+                //0表示回填结束了
+                if(next==0){
+                    break;
+                }
+                temp.getData().setNextHop(t);
+                //跳过与回填的下一条不符的四元式
+                while(temp.getData().getAddress()!=next){
+                    temp = temp.getNext();
+                }
+            }
         }
     }
 

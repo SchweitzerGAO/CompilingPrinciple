@@ -50,9 +50,17 @@ public class ControlStatement {
     }
     //S#ietMSNsMS
     public void parseIfElse(){
+        //quadList.backpatch();
         //quadList.backpatch(E.truelist,M1.quad);
         //quadList.backpatch(E.falselist,M2.quad);
         //S.nextlist = merge(S1.nextlist,N.nextlist,S2.nextlist);
+    }
+    //E#e
+    public void parseE(){
+        //truelist，等待回填
+        quadList.emit("jnz","e","-",0);
+        //falselist,等待回填
+        quadList.emit("j","-","-",0);
     }
     //M#m
     public void parseM(int symbol){
@@ -61,13 +69,12 @@ public class ControlStatement {
     }
     //N#n
     public void parseN(){
-        //N.nextlist = makelist(nextquad)
         N = new StatementElem(quadList.getNextQuad());
         quadList.emit("j","-","-",0);
     }
     //S->a
     public void parseTerminal(){
-        ////////////////////////////////
+        quadList.emit("-","-","-",0);
     }
 
     public void printQuadList() {

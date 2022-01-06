@@ -241,17 +241,22 @@ public class ControlAnalysis {
                                 controlStatement.parseIfElse();
                                 break;
                             }
-                            case -3: {
+                            case -3:{
+                                //E#e
+                                controlStatement.parseE();
+                                break;
+                            }
+                            case -4: {
                                 //M#m
                                 controlStatement.parseM(symbol);
                                 break;
                             }
-                            case -4: {
+                            case -5: {
                                 //N#n
                                 controlStatement.parseN();
                                 break;
                             }
-                            case -5:{
+                            case -6:{
                                 //S#a
                                 controlStatement.parseTerminal();
                                 break;

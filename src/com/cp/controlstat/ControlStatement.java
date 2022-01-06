@@ -16,12 +16,12 @@ public class ControlStatement {
     private List<StatementElem> statementElemList;  //语句
     private final StatementElem S;    //S
     private StatementElem N;    //N
-    private final List<AddressElem> MList;    //M
+    private List<AddressElem> MList;    //M
     private QuadList quadList;  //四元式
 
     public ControlStatement(){
         quadList = new QuadList();
-        E = new BooleanElem(0,0);
+        E = new BooleanElem(100,100);
         statementElemList = new ArrayList<>();
         MList = new ArrayList<>();
         S = new StatementElem(0);
@@ -43,6 +43,12 @@ public class ControlStatement {
     }
     public void setStatementElemList(List<StatementElem> statementElemList){
         this.statementElemList = statementElemList;
+    }
+    public List<AddressElem> getMList(){
+        return MList;
+    }
+    public void setMList(List<AddressElem> MList){
+        this.MList = MList;
     }
 
     //S#ietMS

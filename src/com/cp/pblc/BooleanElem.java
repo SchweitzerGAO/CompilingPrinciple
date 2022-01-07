@@ -5,14 +5,36 @@ package com.cp.pblc;
  * @date: 2022/1/5 18:24
  */
 public class BooleanElem {
+    private String name;
+    private String type;
     private int truelist;
     private int falselist;
 
     public BooleanElem(){ }
 
+    public BooleanElem(String name) {
+        this.name = name;
+    }
+
     public BooleanElem(int truelist, int falselist){
         this.truelist = truelist;
         this.falselist = falselist;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getTruelist(){

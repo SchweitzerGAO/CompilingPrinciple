@@ -1,8 +1,7 @@
 package com.cp.test.Boolean;
 
 import com.cp.booleanstat.BooleanStatement;
-import com.cp.pblc.Quad;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

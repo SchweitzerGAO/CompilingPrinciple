@@ -63,8 +63,10 @@ public class GotoStatement {
                 return;
             }
             elem.setDefined(true);
+            int q = elem.getAddress();
             elem.setAddress(quadList.getNextQuad());
-            //quadList.backpatch(quadList.getNextQuad());
+            quadList.backpatch(q, quadList.getNextQuad());
+            elem.setUsed(true);
         }
         else  // 若不存在
         {
@@ -115,7 +117,7 @@ public class GotoStatement {
         QuadListNode temp = this.quadList.getHead();
         while(temp != null)
         {
-            temp.getData().print();
+            temp.getData().printGoto();
             temp = temp.getNext();
         }
     }

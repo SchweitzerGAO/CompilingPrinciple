@@ -63,7 +63,7 @@ public class QuadList {
             temp = temp.getNext();
         }
         if(temp == null){
-            temp.getData().setNextHop(t);
+//            temp.getData().setNextHop(t);
             System.out.println("backpatch出错，不存在地址为"+p+"的四元式");
         }else{
             //0表示回填结束了

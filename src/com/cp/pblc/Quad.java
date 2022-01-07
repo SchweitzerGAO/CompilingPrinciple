@@ -76,5 +76,10 @@ public class Quad {
         System.out.println(address+": ("+op+", "+arg1+", "+arg2+", "+ (finished? nextHop: "0") + ')');
     }
 
+    public void printGoto()
+    {
+        System.out.println(address+": ("+op+", "+arg1+", "+arg2+", "+ nextHop + ')');
+    }
+
 
 }

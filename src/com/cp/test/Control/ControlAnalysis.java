@@ -1,8 +1,8 @@
-package com.cp.test.Control;
+package com.cp.test.control;
 
 import com.cp.controlstat.ControlStatement;
 import com.cp.pblc.LRTable;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

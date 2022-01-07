@@ -8,6 +8,9 @@ public class Quad {
     private String arg2;  // argument 2
     private int nextHop;  // the next quad to jump
 
+    //nexthop不仅指下一步跳到哪条,也指merge的时候合并的下一串,但merge的不一定被回填了
+    private Boolean finished;  //在回填的时候,改变这个节点的bool值
+
     public Quad() {
     }
 
@@ -17,6 +20,7 @@ public class Quad {
         this.arg1 = arg1;
         this.arg2 = arg2;
         this.nextHop = nextHop;
+        this.finished=false;
     }
 
     public int getAddress() {
@@ -59,9 +63,17 @@ public class Quad {
         this.nextHop = nextHop;
     }
 
+    public boolean getFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
     public void print()
     {
-        System.out.println(address+": ("+op+", "+arg1+", "+arg2+", "+nextHop+')');
+        System.out.println(address+": ("+op+", "+arg1+", "+arg2+", "+ (finished? nextHop: "0") + ')');
     }
 
 

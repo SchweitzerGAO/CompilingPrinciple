@@ -1,1 +1,1 @@
-a < b and b or c
+A or ( B and not ( C or D ) )

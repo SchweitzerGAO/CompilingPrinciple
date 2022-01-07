@@ -1,12 +1,12 @@
 package com.cp.pblc;
 /*
- * @description:非终结符E代表布尔语句，其综合属性E.truelist和E.falselist记录E所应的四元式中需回填真假出口的四元式标号所构成的链表
+ * @description:非终结符E代表布尔语句，其综合属性E.truelist和E.falselist记录E所应的四元式中需回填真假出口的四元式标号所构成的链表,quad记录语句起始位置,M的替代
  * @author: LuBixing
  * @date: 2022/1/5 18:24
  */
 public class BooleanElem {
     private String name;
-    private String type;
+    private int quad;
     private int truelist;
     private int falselist;
 
@@ -21,12 +21,12 @@ public class BooleanElem {
         this.falselist = falselist;
     }
 
-    public String getType() {
-        return type;
+    public int getQuad() {
+        return quad;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setQuad(int quad) {
+        this.quad = quad;
     }
 
     public String getName() {

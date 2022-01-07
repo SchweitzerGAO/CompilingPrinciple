@@ -159,29 +159,28 @@ public class ControlAnalysis {
             for (StringBuilder sb : list) {
                 jj++;
                 System.out.println("("+jj+") 测试输入：" + sb.toString());
-                int symbol = 0;
-                if(sb.toString().contains("then")){
-                    symbol = 1;
-                }
-                else if(sb.toString().contains("else")){
-                    symbol = 2;
-                }
-                //说明要补成if E then m S n else m S
+//                if(sb.toString().contains("then")){
+//                    symbol = 1;
+//                }
+//                else if(sb.toString().contains("else")){
+//                    symbol = 2;
+//                }
+                //说明要补成if E then m S n else m S///////////////////////////
                 if(thenFlag && elseFlag){
                     if(sb.toString().contains("then")){
                         int index=sb.indexOf("then")+5;
-                        sb.insert(index,"m ");
+                        sb.insert(index,"o ");
                         index=sb.indexOf("then")+9;
-                        sb.insert(index," n");
+                        sb.insert(index," o");
                     }
                     if(sb.toString().contains("else")){
                         int index=sb.indexOf("else")+5;
-                        sb.insert(index,"m ");
+                        sb.insert(index,"o ");
                     }
                 }else{  //说明要补成if E then m S
                     if(sb.toString().contains("then")){
                         int index=sb.indexOf("then")+5;
-                        sb.insert(index,"m ");
+                        sb.insert(index,"o ");
                     }
                 }
 //                System.out.println(sb.toString());
@@ -207,13 +206,14 @@ public class ControlAnalysis {
                     Integer peek = stackState.peek();
                     System.out.println("状态栈顶："+peek);
                     //除了保留字之外，其他的终结符（a1，a2）统一为a
-                    if(!input.equals("if") && !input.equals("E") && !input.equals("then")&&
-                            !input.equals("else")&& !input.equals("m")&&!input.equals("n")&&!input.equals("#")) {
+                    if(!input.equals("if") && !input.equals("e") && !input.equals("then")&&
+                            !input.equals("else")&& !input.equals("o")&&!input.equals("#")) {
                         input = "a";
                     }
                     Integer param = action.get(input).get(peek);
-                    System.out.println(action.get(input));
                     System.out.println("加入："+param);
+                    System.out.println(action.get(input));
+                    System.out.println("-------");
                     //表示移进
                     if (param > 0 && param < 999) {
                         stackState.push(param);
@@ -241,17 +241,22 @@ public class ControlAnalysis {
                                 controlStatement.parseIfElse();
                                 break;
                             }
-                            case -3: {
-                                //M#m
-                                controlStatement.parseM(symbol);
+                            case -3:{
+                                //E#e
+                                controlStatement.parseE();
                                 break;
                             }
                             case -4: {
+                                //M#m
+                                controlStatement.parseM();
+                                break;
+                            }
+                            case -5: {
                                 //N#n
                                 controlStatement.parseN();
                                 break;
                             }
-                            case -5:{
+                            case -6:{
                                 //S#a
                                 controlStatement.parseTerminal();
                                 break;
@@ -277,7 +282,7 @@ public class ControlAnalysis {
                         break;
                     }
                     //表示失败
-                    else {
+                    else{
                         System.out.println("error!!!");
                         break;
                     }

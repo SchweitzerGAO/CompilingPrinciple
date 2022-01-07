@@ -64,7 +64,7 @@ public class GotoStatement {
             }
             elem.setDefined(true);
             elem.setAddress(quadList.getNextQuad());
-            quadList.backpatch(quadList.getNextQuad());
+            //quadList.backpatch(quadList.getNextQuad());
         }
         else  // 若不存在
         {

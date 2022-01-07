@@ -12,17 +12,19 @@ import java.util.List;
  */
 public class ControlStatement {
     //布尔表达式E，里面有两个综合属性E.truelist和E.falselist
-    private BooleanElem E;
-    private List<StatementElem> statementElemList;
-    private StatementElem N;
-    private AddressElem[] M;
-    private QuadList quadList;
+    private BooleanElem E;      //布尔表达式
+    private List<StatementElem> statementElemList;  //语句
+    private final StatementElem S;    //S
+    private StatementElem N;    //N
+    private List<AddressElem> MList;    //M
+    private QuadList quadList;  //四元式
 
     public ControlStatement(){
         quadList = new QuadList();
-        E = new BooleanElem(0,0);
+        E = new BooleanElem(100,100);
         statementElemList = new ArrayList<>();
-        M = new AddressElem[2];
+        MList = new ArrayList<>();
+        S = new StatementElem(0);
     }
     public QuadList getQuadList() {
         return quadList;
@@ -42,29 +44,57 @@ public class ControlStatement {
     public void setStatementElemList(List<StatementElem> statementElemList){
         this.statementElemList = statementElemList;
     }
+    public List<AddressElem> getMList(){
+        return MList;
+    }
+    public void setMList(List<AddressElem> MList){
+        this.MList = MList;
+    }
 
     //S#ietMS
     public void parseIf(){
-        //quadList.backpatch(E.truelist,M.quad);
-        ////S.nextlist = quadList.merge()
+        //backpatch(E.truelist,M.quad)
+        quadList.backpatch(E.getTruelist(), MList.get(0).getQuad());
+        //S.nextlist:=merge(E.falselist,S1,nextlist)
+        StatementElem S1 = statementElemList.get(0);
+        S.setNextlist(quadList.merge(E.getFalselist(),S1.getNextlist()));
     }
     //S#ietMSNsMS
     public void parseIfElse(){
-        //quadList.backpatch();
+        //backpatch(E.truelist,M1.quad)
+        //backpatch(E.falselist,M2.quad)
+        quadList.backpatch(E.getTruelist(),MList.get(0).getQuad());
+        quadList.backpatch(E.getFalselist(),MList.get(1).getQuad());
+        //S.nextlist = merge(S1.nextlist,N.nextlist,S2.nextlist);
+        StatementElem S1 = statementElemList.get(0);
+        StatementElem S2 = statementElemList.get(1);
+        int temp = quadList.merge(S1.getNextlist(),N.getNextlist());
+        S.setNextlist(quadList.merge(temp,S2.getNextlist()));
+    }
+    //E#e
+    public void parseE(){
+        //truelist，等待回填
+        quadList.emit("jnz","e","-",0);
+        //falselist,等待回填
+        quadList.emit("j","-","-",0);
     }
     //M#m
-    public void parseM(int symbol){
+    public void parseM(){
         //symbol对应位置1和2，索引对应0和1
-        M[symbol - 1] = new AddressElem(quadList.getNextQuad());
+        //M.quad:=nextquad
+        MList.add(new AddressElem(quadList.getNextQuad()));
     }
     //N#n
     public void parseN(){
+        //N.nextlist=makelist(nextquad/////////////)
         N = new StatementElem(quadList.getNextQuad());
         quadList.emit("j","-","-",0);
     }
     //S->a
     public void parseTerminal(){
-        ////////////////////////////////
+        ////////////////////////////////////////////////////////
+        statementElemList.add(new StatementElem(quadList.getNextQuad()));
+        quadList.emit("-","-","-",0);
     }
 
     public void printQuadList() {

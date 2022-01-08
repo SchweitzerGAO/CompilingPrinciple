@@ -21,7 +21,7 @@ public class ControlStatement {
 
     public ControlStatement(){
         quadList = new QuadList();
-        E = new BooleanElem(100,100);
+        E = new BooleanElem(100,101);
         statementElemList = new ArrayList<>();
         MList = new ArrayList<>();
         S = new StatementElem(0);

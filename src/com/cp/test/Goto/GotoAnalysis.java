@@ -2,6 +2,7 @@ package com.cp.test.Goto;
 
 import com.cp.gotostat.GotoStatement;
 import com.cp.pblc.LRTable;
+//import org.testng.annotations.Test;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;

@@ -2,6 +2,7 @@ package com.cp.test.Boolean;
 
 import com.cp.booleanstat.BooleanStatement;
 import org.junit.Test;
+//import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
